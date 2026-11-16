@@ -16,7 +16,7 @@ async function load(params, searchParams) {
 
 export async function generateMetadata({ params, searchParams }) {
   const d = await load(params, searchParams);
-  return d ? { title: d.eps[d.i].title } : {};
+  return d ? { title: `${d.s.title} – ${d.eps[d.i].title}` } : {};
 }
 
 export default async function Watch({ params, searchParams }) {
@@ -42,7 +42,9 @@ export default async function Watch({ params, searchParams }) {
             allowFullScreen
           />
         </div>
-        <h1>{ep.title}</h1>
+        <h1>
+          {s.title} – {ep.title}
+        </h1>
         <p className="meta">
           <Link href={`/series/${s.id}`}>{s.title}</Link>
           {s.channels && <> · {s.channels.title}</>}
