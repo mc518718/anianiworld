@@ -12,6 +12,8 @@ export default async function SeriesPage({ params, searchParams }) {
   const { id } = await params;
   const [s, eps] = await Promise.all([getSeries(id), getEpisodes(id)]);
   if (!s) notFound();
+  // some channels list their playlists newest-first; always show episode 1 first
+  if (s.reversed) eps.reverse();
   // long shows are split into blocks of 100 episodes
   const pages = Math.ceil(eps.length / PAGE);
   const p = Math.min(Math.max(1, parseInt((await searchParams).p || '1', 10) || 1), Math.max(1, pages));

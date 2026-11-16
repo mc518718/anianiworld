@@ -9,6 +9,7 @@ async function load(params, searchParams) {
   if (!list) list = (await getEpisodeAnywhere(videoId))?.series_id;
   if (!list) return null;
   const [s, eps] = await Promise.all([getSeries(list), getEpisodes(list)]);
+  if (s?.reversed) eps.reverse();
   const i = eps.findIndex((e) => e.video_id === videoId);
   if (!s || i < 0) return null;
   return { s, eps, i };
