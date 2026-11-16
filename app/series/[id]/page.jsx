@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getSeries, getEpisodes } from '@/lib/db';
+import { getSeries, getEpisodes, PAGE } from '@/lib/db';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -8,10 +8,14 @@ export async function generateMetadata({ params }) {
   return s ? { title: s.title, description: (s.description || '').slice(0, 160) } : {};
 }
 
-export default async function SeriesPage({ params }) {
+export default async function SeriesPage({ params, searchParams }) {
   const { id } = await params;
   const [s, eps] = await Promise.all([getSeries(id), getEpisodes(id)]);
   if (!s) notFound();
+  // long shows are split into blocks of 100 episodes
+  const pages = Math.ceil(eps.length / PAGE);
+  const p = Math.min(Math.max(1, parseInt((await searchParams).p || '1', 10) || 1), Math.max(1, pages));
+  const shown = eps.slice((p - 1) * PAGE, p * PAGE);
 
   return (
     <>
@@ -35,8 +39,25 @@ export default async function SeriesPage({ params }) {
         <div className="sec-h">
           <h2>Danh sách tập</h2>
         </div>
+        {pages > 1 && (
+          <div className="chips" style={{ flexWrap: 'wrap', margin: '0 0 16px' }}>
+            {Array.from({ length: pages }, (_, i) => (
+              <Link
+                key={i}
+                href={`/series/${s.id}?p=${i + 1}`}
+                className="chip"
+                style={{
+                  padding: '5px 13px',
+                  ...(i + 1 === p ? { background: 'var(--accent)', color: '#14130c', borderColor: 'var(--accent)' } : {}),
+                }}
+              >
+                {i * PAGE + 1}–{Math.min((i + 1) * PAGE, eps.length)}
+              </Link>
+            ))}
+          </div>
+        )}
         <div className="grid">
-          {eps.map((e) => (
+          {shown.map((e) => (
             <Link key={e.video_id} href={`/watch/${e.video_id}?list=${s.id}`} className="card">
               <div className="thumb">{e.thumbnail && <img src={e.thumbnail} alt="" loading="lazy" />}</div>
               <h3>{e.title}</h3>
