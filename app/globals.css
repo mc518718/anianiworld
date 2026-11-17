@@ -126,7 +126,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* header sign-in */
 .authnav { flex: none; min-width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
 .authnav.login { padding: 0 14px; border-radius: 999px; background: var(--accent); color: #14130c; }
-.authnav.avatar { width: 36px; border-radius: 50%; background: var(--accent2); color: #fff; font-size: 15px; }
+.authnav.avatar { width: 36px; border-radius: 50%; background: var(--accent); color: #14130c; font-size: 15px; }
 
 button { font: inherit; }
 .btn { border: 0; cursor: pointer; text-align: center; }
@@ -147,7 +147,7 @@ button.link:hover { color: var(--accent2); }
 .auth input:focus { border-color: var(--accent); }
 .auth label.check { grid-template-columns: auto 1fr; align-items: start; gap: 10px; font-weight: 400; line-height: 1.45; }
 .auth label.check input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--accent); }
-.auth a { color: var(--accent); }
+.auth a:not(.btn) { color: var(--accent); }
 .auth .btn { margin-top: 4px; }
 .or { display: flex; align-items: center; gap: 12px; margin: 18px 0 8px; color: var(--mute); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
 .or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
@@ -158,7 +158,7 @@ button.link:hover { color: var(--accent2); }
 /* member page */
 .me { display: grid; grid-template-columns: auto 1fr; gap: 14px 16px; align-items: center; margin-top: 20px; padding: 20px 18px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
 @media (min-width: 720px) { .me { grid-template-columns: auto 1fr auto auto; padding: 24px 28px; } }
-.me-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent2); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; }
+.me-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #14130c; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; }
 .me-id { min-width: 0; }
 .me-id h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
 .me-id .meta { overflow-wrap: anywhere; }
@@ -190,7 +190,10 @@ button.link:hover { color: var(--accent2); }
 .doc p { margin: 0 0 12px; }
 .doc ul { margin: 0 0 12px; padding-left: 22px; }
 .doc li { margin-bottom: 6px; }
-.doc a { color: var(--accent); }
+.doc a:not(.btn) { color: var(--accent); }
 .foot-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 12px !important; }
 .foot-links a { color: var(--text); font-size: 13px; }
 .foot-links a:hover { color: var(--accent); }
+
+/* Anything on the yellow or coral accent always carries dark text, whatever link colour surrounds it. */
+.btn:not(.ghost), .kicker, .tag, .authnav.login, .authnav.avatar, .me-avatar, .tabs button.on, .hc-arrow:hover { color: #14130c !important; }
