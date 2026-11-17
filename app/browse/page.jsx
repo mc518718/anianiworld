@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { KindTag } from '@/components/SeriesCard';
 import { browseSeries, getChannels, GENRES, SORTS, OLD_YEAR } from '@/lib/db';
 
-export const metadata = {
+export const metadata = { alternates: { canonical: '/browse' },
   title: 'Khám phá anime',
   description: 'Lọc anime theo thể loại, phiên bản Vietsub hoặc lồng tiếng, năm phát hành, trạng thái và kênh.',
 };

@@ -19,7 +19,16 @@ async function load(params, searchParams) {
 
 export async function generateMetadata({ params, searchParams }) {
   const d = await load(params, searchParams);
-  return d ? { title: `${d.s.title} – ${d.eps[d.i].title}` } : {};
+  if (!d) return {};
+  const ep = d.eps[d.i];
+  const path = `/watch/${ep.video_id}?list=${encodeURIComponent(d.s.id)}`;
+  const description = `Xem ${d.s.title} ${ep.title} miễn phí, bản quyền chính thức trên Anianiworld.`;
+  return {
+    title: `${d.s.title} – ${ep.title}`,
+    description,
+    alternates: { canonical: path },
+    openGraph: { type: 'video.episode', title: `${d.s.title} – ${ep.title}`, description, url: path, images: [ep.thumbnail].filter(Boolean) },
+  };
 }
 
 export default async function Watch({ params, searchParams }) {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Contact from '@/components/Contact';
 
-export const metadata = { title: 'Chính sách quyền riêng tư' };
+export const metadata = { alternates: { canonical: '/privacy' }, title: 'Chính sách quyền riêng tư' };
 
 export default function Privacy() {
   return (
@@ -30,6 +30,11 @@ export default function Privacy() {
         <li>
           Lượt xem: để mỗi người chỉ được tính một lượt cho mỗi tập trong một ngày, chúng tôi tạo một mã băm không thể
           đảo ngược từ địa chỉ IP và mã video. Chúng tôi không lưu địa chỉ IP; các mã băm này được xóa sau tối đa hai ngày.
+        </li>
+        <li>
+          Thống kê truy cập ẩn danh: chúng tôi đếm số lượt truy cập theo ngày, loại trang được xem và trang web đã dẫn
+          bạn tới đây. Số liệu chỉ là tổng theo ngày, không gắn với tài khoản và không dùng cookie; mã băm dùng để
+          đếm số khách trong ngày được xóa sau tối đa ba ngày.
         </li>
         <li>Nhật ký kỹ thuật do nhà cung cấp máy chủ ghi lại (ví dụ địa chỉ IP, loại trình duyệt) để vận hành và bảo vệ trang.</li>
         <li>Bộ nhớ trình duyệt: khi bạn đăng nhập, phiên đăng nhập được lưu trên thiết bị của bạn. Chúng tôi không dùng cookie quảng cáo.</li>

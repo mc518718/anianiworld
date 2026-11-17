@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { KindTag } from '@/components/SeriesCard';
 import SubscribeButton from '@/components/SubscribeButton';
 import { getSeries, getEpisodes, PAGE, genresOf, synopsis, views } from '@/lib/db';
+import { SITE_URL } from '@/lib/config';
 
 const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
@@ -11,10 +12,21 @@ export async function generateMetadata({ params }) {
   const s = await getSeries(id);
   if (!s) return {};
   const story = synopsis(s);
+  const label = KIND[s.kind] ? `${s.title} ${KIND[s.kind]}` : s.title;
+  const description = story
+    ? story.slice(0, 160)
+    : `Xem ${label} miễn phí, bản quyền chính thức trên Anianiworld.`;
   return {
-    title: s.title,
-    description: story ? story.slice(0, 160) : undefined,
-    openGraph: { title: s.title, description: story ? story.slice(0, 200) : undefined, images: [s.backdrop || s.poster || s.thumbnail].filter(Boolean) },
+    title: label,
+    description,
+    alternates: { canonical: `/series/${encodeURIComponent(s.id)}` },
+    openGraph: {
+      type: 'video.tv_show',
+      title: label,
+      description,
+      url: `/series/${encodeURIComponent(s.id)}`,
+      images: [s.backdrop || s.poster || s.thumbnail].filter(Boolean),
+    },
   };
 }
 
@@ -37,8 +49,23 @@ export default async function SeriesPage({ params, searchParams }) {
     ['Tên gốc', s.alt_title && s.alt_title !== s.title ? s.alt_title : null],
   ].filter(([, v]) => v);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TVSeries',
+    name: s.title,
+    alternateName: s.alt_title || undefined,
+    description: story || undefined,
+    image: s.poster || s.thumbnail || undefined,
+    genre: genresOf(s),
+    inLanguage: 'vi',
+    numberOfEpisodes: eps.length,
+    startDate: s.year ? String(s.year) : undefined,
+    url: `${SITE_URL}/series/${encodeURIComponent(s.id)}`,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <div className="show">
         {(s.backdrop || s.thumbnail) && <img className="show-bg" src={s.backdrop || s.thumbnail} alt="" />}
         <div className="show-in">

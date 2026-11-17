@@ -1,12 +1,27 @@
 import Link from 'next/link';
 import AuthNav from '@/components/AuthNav';
-import { CONTACT_EMAIL } from '@/lib/config';
+import Tracker from '@/components/Tracker';
+import { CONTACT_EMAIL, SITE_URL } from '@/lib/config';
 import './globals.css';
 
+const DESCRIPTION =
+  'Anianiworld tổng hợp anime Nhật Bản có bản quyền, phụ đề và lồng tiếng Việt, phát trực tiếp từ các kênh YouTube chính thức.';
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: { default: 'Anianiworld – Xem anime bản quyền Vietsub miễn phí', template: '%s | Anianiworld' },
-  description:
-    'Anianiworld tổng hợp anime Nhật Bản có bản quyền, phụ đề và lồng tiếng Việt, phát trực tiếp từ các kênh YouTube chính thức.',
+  description: DESCRIPTION,
+  applicationName: 'Anianiworld',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'Anianiworld',
+    locale: 'vi_VN',
+    url: '/',
+    title: 'Anianiworld – Xem anime bản quyền Vietsub miễn phí',
+    description: DESCRIPTION,
+  },
+  twitter: { card: 'summary_large_image' },
 };
 export const viewport = { themeColor: '#0e0f14' };
 
@@ -41,6 +56,7 @@ export default function RootLayout({ children }) {
           </div>
         </header>
         <main className="wrap">{children}</main>
+        <Tracker />
         <footer className="wrap foot">
           <p className="foot-links">
             <Link href="/terms">Điều khoản dịch vụ</Link>

@@ -1,7 +1,7 @@
 import SeriesCard from '@/components/SeriesCard';
 import { searchSeries } from '@/lib/db';
 
-export const metadata = { title: 'Tìm kiếm' };
+export const metadata = { title: 'Tìm kiếm', alternates: { canonical: '/search' }, robots: { index: false } };
 
 export default async function Search({ searchParams }) {
   const q = ((await searchParams).q || '').toString().trim().slice(0, 80);

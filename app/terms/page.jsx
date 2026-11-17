@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Contact from '@/components/Contact';
 
-export const metadata = { title: 'Điều khoản dịch vụ' };
+export const metadata = { alternates: { canonical: '/terms' }, title: 'Điều khoản dịch vụ' };
 
 export default function Terms() {
   return (

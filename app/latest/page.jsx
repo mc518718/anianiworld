@@ -3,7 +3,7 @@ import SeriesCard from '@/components/SeriesCard';
 import { getLatestSeries } from '@/lib/db';
 
 const PER = 48;
-export const metadata = { title: 'Mới cập nhật' };
+export const metadata = { alternates: { canonical: '/latest' }, title: 'Mới cập nhật' };
 
 export default async function Latest({ searchParams }) {
   const page = Math.min(200, Math.max(1, parseInt((await searchParams).page || '1', 10) || 1));
