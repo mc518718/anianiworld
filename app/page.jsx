@@ -1,14 +1,13 @@
 import Link from 'next/link';
 import SeriesCard from '@/components/SeriesCard';
 import HeroCarousel from '@/components/HeroCarousel';
-import { getChannels, getHeroSeries, getLatestSeries, getTopSeries, genresOf, synopsis, views } from '@/lib/db';
+import { getHeroSeries, getLatestSeries, getTopSeries, genresOf, synopsis, views } from '@/lib/db';
 
 export const revalidate = 300;
 const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
 export default async function Home() {
-  const [channels, latest, top, hero] = await Promise.all([
-    getChannels(),
+  const [latest, top, hero] = await Promise.all([
     getLatestSeries(24),
     getTopSeries(10),
     getHeroSeries(4),
@@ -29,15 +28,6 @@ export default async function Home() {
   return (
     <>
       <HeroCarousel slides={slides} />
-
-      <div className="chips">
-        {channels.map((c) => (
-          <Link key={c.id} href={`/channel/${c.id}`} className="chip">
-            {c.thumbnail && <img src={c.thumbnail} alt="" />}
-            {c.title}
-          </Link>
-        ))}
-      </div>
 
       <section className="sec">
         <div className="sec-h">
