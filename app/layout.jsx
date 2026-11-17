@@ -17,7 +17,6 @@ export const metadata = {
     type: 'website',
     siteName: 'Anianiworld',
     locale: 'vi_VN',
-    url: '/',
     title: 'Anianiworld – Xem anime bản quyền Vietsub miễn phí',
     description: DESCRIPTION,
   },
