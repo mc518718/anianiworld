@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AuthNav from '@/components/AuthNav';
 import './globals.css';
 
 export const metadata = {
@@ -28,10 +29,15 @@ export default function RootLayout({ children }) {
             <form action="/search" className="search">
               <input name="q" type="search" placeholder="Tìm anime…" aria-label="Tìm anime" required />
             </form>
+            <AuthNav />
           </div>
         </header>
         <main className="wrap">{children}</main>
         <footer className="wrap foot">
+          <p className="foot-links">
+            <Link href="/terms">Điều khoản dịch vụ</Link>
+            <Link href="/privacy">Chính sách quyền riêng tư</Link>
+          </p>
           <p>
             Anianiworld chỉ lập chỉ mục và nhúng video từ các kênh YouTube chính thức. Video được phát bằng trình
             phát của YouTube; trang không lưu trữ hay chuyển mã bất kỳ tệp video nào.

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { KindTag } from '@/components/SeriesCard';
+import SubscribeButton from '@/components/SubscribeButton';
 import { getSeries, getEpisodes, PAGE, genresOf, synopsis, views } from '@/lib/db';
 
 const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
@@ -70,11 +71,14 @@ export default async function SeriesPage({ params, searchParams }) {
                 </div>
               )}
             </dl>
-            {eps[0] && (
-              <Link className="btn" href={`/watch/${eps[0].video_id}?list=${s.id}`}>
-                ▶ Xem ngay
-              </Link>
-            )}
+            <div className="nav">
+              {eps[0] && (
+                <Link className="btn" href={`/watch/${eps[0].video_id}?list=${s.id}`}>
+                  ▶ Xem ngay
+                </Link>
+              )}
+              <SubscribeButton seriesId={s.id} />
+            </div>
           </div>
         </div>
       </div>

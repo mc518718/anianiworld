@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSeries, getEpisodes, getEpisodeAnywhere, PAGE, views } from '@/lib/db';
 import ViewPing from '@/components/ViewPing';
+import SubscribeButton from '@/components/SubscribeButton';
 
 async function load(params, searchParams) {
   const { videoId } = await params;
@@ -65,6 +66,7 @@ export default async function Watch({ params, searchParams }) {
               Tập tiếp theo →
             </Link>
           )}
+          <SubscribeButton seriesId={s.id} />
         </div>
       </div>
 
