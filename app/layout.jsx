@@ -21,6 +21,7 @@ export const metadata = {
     description: DESCRIPTION,
   },
   twitter: { card: 'summary_large_image' },
+  verification: { google: 'eJd2CX0rhjh0qB0AiPiquiOUmvp7IDLDr45kGQu64Is' },
 };
 export const viewport = { themeColor: '#0e0f14' };
 
