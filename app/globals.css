@@ -40,6 +40,18 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .card:hover .thumb img { transform: scale(1.04); }
 .badge { position: absolute; right: 6px; bottom: 6px; font-size: 11px; font-weight: 600; background: rgba(0,0,0,.78); padding: 2px 7px; border-radius: 5px; }
 .meta { margin: 0; color: var(--mute); font-size: 12px; }
+.tag { position: absolute; left: 6px; top: 6px; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 5px; color: #14130c; background: var(--accent); }
+.tag.dub { background: var(--accent2); }
+
+.rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px 20px; }
+@media (min-width: 860px) { .rank { grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(5, auto); } }
+.rank-item { display: grid; grid-template-columns: 34px 124px 1fr; gap: 12px; align-items: center; padding: 8px; border-radius: 10px; }
+.rank-item:hover { background: var(--panel); }
+.rank-item:hover h3 { color: var(--accent); }
+.rank-item .no { font-size: 24px; font-weight: 800; text-align: center; color: var(--mute); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.rank-item .no.hot { color: var(--accent); }
+.rank-item .thumb { border-radius: 8px; }
+.rank-item h3 { margin: 0 0 3px; font-size: 14px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .chips { display: flex; gap: 8px; overflow-x: auto; margin: 16px 0 0; padding-bottom: 2px; scrollbar-width: none; }
 .chip { display: flex; align-items: center; gap: 8px; flex: none; padding: 5px 13px 5px 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: 13px; font-weight: 500; }

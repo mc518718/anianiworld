@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getSeries, getEpisodes, PAGE } from '@/lib/db';
+import { getSeries, getEpisodes, PAGE, views } from '@/lib/db';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -26,7 +26,7 @@ export default async function SeriesPage({ params, searchParams }) {
         <div>
           <h1>{s.title}</h1>
           <p className="meta">
-            {s.channels && <Link href={`/channel/${s.channels.id}`}>{s.channels.title}</Link>} · {eps.length} tập
+            {s.channels && <Link href={`/channel/${s.channels.id}`}>{s.channels.title}</Link>} · {eps.length} tập · {views(s.views)}
           </p>
           {s.description && <p className="desc">{s.description}</p>}
           {eps[0] && (
@@ -63,6 +63,7 @@ export default async function SeriesPage({ params, searchParams }) {
             <Link key={e.video_id} href={`/watch/${e.video_id}?list=${s.id}`} className="card">
               <div className="thumb">{e.thumbnail && <img src={e.thumbnail} alt="" loading="lazy" />}</div>
               <h3>{e.title}</h3>
+              <p className="meta">{views(e.views)}</p>
             </Link>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getSeries, getEpisodes, getEpisodeAnywhere, PAGE } from '@/lib/db';
+import { getSeries, getEpisodes, getEpisodeAnywhere, PAGE, views } from '@/lib/db';
+import ViewPing from '@/components/ViewPing';
 
 async function load(params, searchParams) {
   const { videoId } = await params;
@@ -34,6 +35,7 @@ export default async function Watch({ params, searchParams }) {
 
   return (
     <div className="watch">
+      <ViewPing seriesId={s.id} videoId={ep.video_id} />
       <div>
         <div className="player">
           <iframe
@@ -49,6 +51,8 @@ export default async function Watch({ params, searchParams }) {
         <p className="meta">
           <Link href={`/series/${s.id}`}>{s.title}</Link>
           {s.channels && <> · {s.channels.title}</>}
+          {' · '}
+          {views(ep.views)}
         </p>
         <div className="nav">
           {prev && (
