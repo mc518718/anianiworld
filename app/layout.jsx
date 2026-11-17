@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import AuthNav from '@/components/AuthNav';
 import Tracker from '@/components/Tracker';
-import { CONTACT_EMAIL, SITE_URL } from '@/lib/config';
+import { CONTACT_EMAIL, FACEBOOK_URL, SITE_URL } from '@/lib/config';
 import './globals.css';
 
 const DESCRIPTION =
@@ -62,6 +62,7 @@ export default function RootLayout({ children }) {
             <Link href="/terms">Điều khoản dịch vụ</Link>
             <Link href="/privacy">Chính sách quyền riêng tư</Link>
             {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Liên hệ</a>}
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer">Facebook</a>
           </p>
           <p>
             Anianiworld chỉ lập chỉ mục và nhúng video từ các kênh YouTube chính thức. Video được phát bằng trình
