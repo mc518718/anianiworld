@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AuthNav from '@/components/AuthNav';
+import { CONTACT_EMAIL } from '@/lib/config';
 import './globals.css';
 
 export const metadata = {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
           <p className="foot-links">
             <Link href="/terms">Điều khoản dịch vụ</Link>
             <Link href="/privacy">Chính sách quyền riêng tư</Link>
+            {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Liên hệ</a>}
           </p>
           <p>
             Anianiworld chỉ lập chỉ mục và nhúng video từ các kênh YouTube chính thức. Video được phát bằng trình
