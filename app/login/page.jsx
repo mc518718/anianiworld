@@ -34,20 +34,11 @@ function LoginForm() {
     }
   }
 
-  async function google() {
-    setError('');
-    const { error: err } = await supabase().auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}${next}` },
-    });
-    if (err) setError('Chưa thể đăng nhập bằng Google. Vui lòng thử lại sau.');
-  }
-
   return (
     <div className="auth">
       <h1>Đăng nhập</h1>
       <p className="auth-sub">Đăng ký theo dõi anime và lưu lịch sử xem của bạn.</p>
-      <GoogleButton onClick={google}>Tiếp tục với Google</GoogleButton>
+      <GoogleButton mode="signin" next={next} onError={setError} />
       <div className="or">hoặc</div>
       <form onSubmit={submit}>
         <label>

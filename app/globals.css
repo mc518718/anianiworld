@@ -202,3 +202,7 @@ button.link:hover { color: var(--accent2); }
 .gbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 46px; margin-top: 14px; padding: 0 16px; border: 1px solid #dadce0; border-radius: 999px; background: #fff; color: #1f1f1f; font-size: 15px; font-weight: 600; cursor: pointer; }
 .gbtn:hover { background: #f2f4f7; }
 .gbtn img { width: 20px; height: 20px; flex: none; object-fit: contain; }
+
+.gwrap { margin-top: 14px; min-height: 46px; }
+.gwrap .gbtn { margin-top: 0; }
+.gsi { display: flex; justify-content: center; color-scheme: light; }

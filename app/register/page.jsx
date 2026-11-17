@@ -36,14 +36,7 @@ function RegisterForm() {
     setSent(true);
   }
 
-  async function google() {
-    if (!agree) return setError('Bạn cần đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư.');
-    const { error: err } = await supabase().auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}${next}` },
-    });
-    if (err) setError('Chưa thể đăng ký bằng Google. Vui lòng thử lại sau.');
-  }
+  const needAgree = () => (agree ? null : 'Bạn cần đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư.');
 
   if (sent)
     return (
@@ -93,7 +86,7 @@ function RegisterForm() {
         </button>
       </form>
       <div className="or">hoặc</div>
-      <GoogleButton onClick={google}>Đăng ký bằng Google</GoogleButton>
+      <GoogleButton mode="signup" next={next} guard={needAgree} onError={setError} />
       <p className="auth-links">
         <span>
           Đã có tài khoản? <Link href="/login">Đăng nhập</Link>
