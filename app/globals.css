@@ -100,7 +100,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .chip:hover { border-color: var(--accent); }
 
 .btn { display: inline-block; margin-top: 14px; padding: 10px 22px; border-radius: 999px; background: var(--accent); color: #14130c; font-weight: 600; font-size: 15px; }
-.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.btn.ghost { background: #2b2f3d; color: var(--text); border: 1px solid #454b5f; }
+.btn.ghost:hover { background: #363b4c; border-color: #5a6179; }
 
 .player { position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden; margin: 16px -16px 0; border-radius: 0; }
 @media (min-width: 640px) { .player { margin: 18px 0 0; border-radius: 12px; } }
