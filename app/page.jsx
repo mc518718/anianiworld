@@ -42,6 +42,7 @@ export default async function Home() {
       <section className="sec">
         <div className="sec-h">
           <h2>Bảng xếp hạng Top 10</h2>
+          <Link href="/browse?sort=hot">Khám phá →</Link>
         </div>
         <ol className="rank">
           {top.map((s, i) => (

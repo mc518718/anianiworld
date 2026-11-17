@@ -26,6 +26,9 @@ export default function RootLayout({ children }) {
             <Link href="/" className="logo">
               ani<span>ani</span>world
             </Link>
+            <Link href="/browse" className="navlink">
+              Khám phá
+            </Link>
             <form action="/search" className="search">
               <input name="q" type="search" placeholder="Tìm anime…" aria-label="Tìm anime" required />
             </form>
