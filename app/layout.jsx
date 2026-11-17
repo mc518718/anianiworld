@@ -30,6 +30,10 @@ export default function RootLayout({ children }) {
             <Link href="/browse" className="navlink">
               Khám phá
             </Link>
+            {/* merchandise: no destination yet */}
+            <span className="navlink soon" role="link" aria-disabled="true" title="Sắp ra mắt">
+              Merch
+            </span>
             <form action="/search" className="search">
               <input name="q" type="search" placeholder="Tìm anime…" aria-label="Tìm anime" required />
             </form>

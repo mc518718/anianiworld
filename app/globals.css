@@ -229,3 +229,14 @@ a.pcard:hover h3 { color: var(--accent); }
   .search { order: 5; flex-basis: 100%; }
   .search input { max-width: none; }
 }
+
+/* header link without a destination yet */
+.navlink.soon { background: transparent; border: 1.5px solid var(--accent2); color: var(--accent2) !important; cursor: default; }
+.navlink.soon:hover { background: transparent; }
+/* small screens: logo and the two links on the first row, search and sign-in on the second */
+@media (max-width: 559px) {
+  .bar .navlink { margin-left: 0; padding: 0 13px; }
+  .bar .logo { margin-right: auto; }
+  .search { order: 5; flex: 1 1 calc(100% - 120px); }
+  .authnav { order: 6; }
+}
