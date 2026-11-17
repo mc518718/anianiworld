@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { KindTag } from '@/components/SeriesCard';
-import { getSeries, getEpisodes, PAGE, synopsis, views } from '@/lib/db';
+import { getSeries, getEpisodes, PAGE, genresOf, synopsis, views } from '@/lib/db';
 
 const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
@@ -47,9 +47,9 @@ export default async function SeriesPage({ params, searchParams }) {
           </div>
           <div className="show-txt">
             <h1>{s.title}</h1>
-            {s.genres?.length > 0 && (
+            {genresOf(s).length > 0 && (
               <div className="genres">
-                {s.genres.map((g) => (
+                {genresOf(s).map((g) => (
                   <span key={g}>{g}</span>
                 ))}
               </div>

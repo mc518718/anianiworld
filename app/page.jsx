@@ -1,22 +1,27 @@
 import Link from 'next/link';
 import SeriesCard from '@/components/SeriesCard';
 import HeroCarousel from '@/components/HeroCarousel';
-import { getChannels, getLatestSeries, getTopSeries, synopsis, views } from '@/lib/db';
+import { getChannels, getHeroSeries, getLatestSeries, getTopSeries, genresOf, synopsis, views } from '@/lib/db';
 
 export const revalidate = 300;
 const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
 export default async function Home() {
-  const [channels, latest, top] = await Promise.all([getChannels(), getLatestSeries(24), getTopSeries(10)]);
+  const [channels, latest, top, hero] = await Promise.all([
+    getChannels(),
+    getLatestSeries(24),
+    getTopSeries(10),
+    getHeroSeries(4),
+  ]);
 
   if (!latest.length) return <p className="empty">Đang đồng bộ dữ liệu, vui lòng quay lại sau ít phút.</p>;
 
-  const slides = top.slice(0, 4).map((s) => ({
+  const slides = hero.map((s) => ({
     id: s.id,
     title: s.title,
     image: s.backdrop || s.thumbnail,
     poster: s.poster,
-    genres: (s.genres || []).slice(0, 3),
+    genres: genresOf(s).slice(0, 3),
     meta: [s.year, KIND[s.kind], `${s.episode_count} tập`, views(s.views)].filter(Boolean).join(' · '),
     story: synopsis(s),
   }));
