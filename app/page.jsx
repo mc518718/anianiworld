@@ -1,27 +1,29 @@
 import Link from 'next/link';
-import SeriesCard, { KindTag } from '@/components/SeriesCard';
-import { getChannels, getLatestSeries, getTopSeries, timeAgo, views } from '@/lib/db';
+import SeriesCard from '@/components/SeriesCard';
+import HeroCarousel from '@/components/HeroCarousel';
+import { getChannels, getLatestSeries, getTopSeries, synopsis, views } from '@/lib/db';
 
 export const revalidate = 300;
+const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
 export default async function Home() {
-  const [channels, latest, top] = await Promise.all([getChannels(), getLatestSeries(25), getTopSeries(10)]);
-  const [hero, ...rest] = latest;
+  const [channels, latest, top] = await Promise.all([getChannels(), getLatestSeries(24), getTopSeries(10)]);
 
-  if (!hero) return <p className="empty">Đang đồng bộ dữ liệu, vui lòng quay lại sau ít phút.</p>;
+  if (!latest.length) return <p className="empty">Đang đồng bộ dữ liệu, vui lòng quay lại sau ít phút.</p>;
+
+  const slides = top.slice(0, 4).map((s) => ({
+    id: s.id,
+    title: s.title,
+    image: s.backdrop || s.thumbnail,
+    poster: s.poster,
+    genres: (s.genres || []).slice(0, 3),
+    meta: [s.year, KIND[s.kind], `${s.episode_count} tập`, views(s.views)].filter(Boolean).join(' · '),
+    story: synopsis(s),
+  }));
 
   return (
     <>
-      <Link href={`/series/${hero.id}`} className="hero">
-        {hero.thumbnail && <img src={hero.thumbnail} alt="" />}
-        <div className="txt">
-          <span className="kicker">Mới cập nhật</span>
-          <h1>{hero.title}</h1>
-          <p>
-            {hero.episode_count} tập · {timeAgo(hero.latest_episode_at)}
-          </p>
-        </div>
-      </Link>
+      <HeroCarousel slides={slides} />
 
       <div className="chips">
         {channels.map((c) => (
@@ -41,15 +43,15 @@ export default async function Home() {
             <li key={s.id}>
               <Link href={`/series/${s.id}`} className="rank-item">
                 <span className={`no${i < 3 ? ' hot' : ''}`}>{i + 1}</span>
-                <div className="thumb">
-                  {s.thumbnail && <img src={s.thumbnail} alt="" loading="lazy" />}
-                  <KindTag kind={s.kind} />
+                <div className="thumb poster">
+                  {(s.poster || s.thumbnail) && <img src={s.poster || s.thumbnail} alt="" loading="lazy" />}
                 </div>
                 <div className="info">
                   <h3>{s.title}</h3>
                   <p className="meta">
-                    {views(s.views)} · {s.episode_count} tập
+                    {[s.year, KIND[s.kind], `${s.episode_count} tập`].filter(Boolean).join(' · ')}
                   </p>
+                  <p className="meta">{views(s.views)}</p>
                 </div>
               </Link>
             </li>
@@ -63,7 +65,7 @@ export default async function Home() {
           <Link href="/latest">Xem thêm →</Link>
         </div>
         <div className="grid">
-          {rest.map((s) => (
+          {latest.map((s) => (
             <SeriesCard key={s.id} s={s} />
           ))}
         </div>

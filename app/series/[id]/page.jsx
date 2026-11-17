@@ -1,11 +1,20 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getSeries, getEpisodes, PAGE, views } from '@/lib/db';
+import { KindTag } from '@/components/SeriesCard';
+import { getSeries, getEpisodes, PAGE, synopsis, views } from '@/lib/db';
+
+const KIND = { sub: 'Vietsub', dub: 'Lồng tiếng' };
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const s = await getSeries(id);
-  return s ? { title: s.title, description: (s.description || '').slice(0, 160) } : {};
+  if (!s) return {};
+  const story = synopsis(s);
+  return {
+    title: s.title,
+    description: story ? story.slice(0, 160) : undefined,
+    openGraph: { title: s.title, description: story ? story.slice(0, 200) : undefined, images: [s.backdrop || s.poster || s.thumbnail].filter(Boolean) },
+  };
 }
 
 export default async function SeriesPage({ params, searchParams }) {
@@ -18,24 +27,64 @@ export default async function SeriesPage({ params, searchParams }) {
   const pages = Math.ceil(eps.length / PAGE);
   const p = Math.min(Math.max(1, parseInt((await searchParams).p || '1', 10) || 1), Math.max(1, pages));
   const shown = eps.slice((p - 1) * PAGE, p * PAGE);
+  const story = synopsis(s);
+  const facts = [
+    ['Năm phát hành', s.year],
+    ['Phiên bản', KIND[s.kind]],
+    ['Số tập', `${eps.length} tập`],
+    ['Lượt xem', views(s.views).replace(' lượt xem', '')],
+    ['Tên gốc', s.alt_title && s.alt_title !== s.title ? s.alt_title : null],
+  ].filter(([, v]) => v);
 
   return (
     <>
-      <div className="head">
-        <div className="thumb">{s.thumbnail && <img src={s.thumbnail} alt="" />}</div>
-        <div>
-          <h1>{s.title}</h1>
-          <p className="meta">
-            {s.channels && <Link href={`/channel/${s.channels.id}`}>{s.channels.title}</Link>} · {eps.length} tập · {views(s.views)}
-          </p>
-          {s.description && <p className="desc">{s.description}</p>}
-          {eps[0] && (
-            <Link className="btn" href={`/watch/${eps[0].video_id}?list=${s.id}`}>
-              ▶ Xem ngay
-            </Link>
-          )}
+      <div className="show">
+        {(s.backdrop || s.thumbnail) && <img className="show-bg" src={s.backdrop || s.thumbnail} alt="" />}
+        <div className="show-in">
+          <div className={`show-art${s.poster ? '' : ' wide'}`}>
+            {(s.poster || s.thumbnail) && <img src={s.poster || s.thumbnail} alt={`Poster ${s.title}`} />}
+            <KindTag kind={s.kind} />
+          </div>
+          <div className="show-txt">
+            <h1>{s.title}</h1>
+            {s.genres?.length > 0 && (
+              <div className="genres">
+                {s.genres.map((g) => (
+                  <span key={g}>{g}</span>
+                ))}
+              </div>
+            )}
+            <dl className="facts">
+              {facts.map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+              {s.channels && (
+                <div>
+                  <dt>Kênh</dt>
+                  <dd>
+                    <Link href={`/channel/${s.channels.id}`}>{s.channels.title}</Link>
+                  </dd>
+                </div>
+              )}
+            </dl>
+            {eps[0] && (
+              <Link className="btn" href={`/watch/${eps[0].video_id}?list=${s.id}`}>
+                ▶ Xem ngay
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+
+      <section className="sec">
+        <div className="sec-h">
+          <h2>Nội dung</h2>
+        </div>
+        <p className="story">{story || 'Chưa có phần giới thiệu nội dung cho anime này.'}</p>
+      </section>
 
       <section className="sec">
         <div className="sec-h">

@@ -37,6 +37,10 @@ export default function RootLayout({ children }) {
             phát của YouTube; trang không lưu trữ hay chuyển mã bất kỳ tệp video nào.
           </p>
           <p>Trang sử dụng YouTube API và không liên kết với YouTube hay Google.</p>
+          <p>
+            Thông tin và hình ảnh phim do TMDB cung cấp. Sản phẩm này sử dụng API của TMDB nhưng không được TMDB xác
+            nhận hay chứng nhận.
+          </p>
         </footer>
       </body>
     </html>
