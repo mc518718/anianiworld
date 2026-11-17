@@ -41,7 +41,8 @@ export default function RootLayout({ children }) {
         <header className="top">
           <div className="wrap bar">
             <Link href="/" className="logo">
-              ani<span>ani</span>world
+                <img className="logo-mark" src="/logo-mark.png" alt="" width="31" height="32" />
+              <b>ani<span>ani</span>world</b>
             </Link>
             <Link href="/browse" className="navlink">
               Khám phá

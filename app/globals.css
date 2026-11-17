@@ -263,3 +263,9 @@ a.pcard:hover h3 { color: var(--accent); }
 .foot-links a.social { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; vertical-align: middle; transition: transform .15s; }
 .foot-links a.social:hover { transform: scale(1.1); }
 .foot-links a.social svg { width: 28px; height: 28px; display: block; }
+
+/* logo mark beside the site name */
+.logo { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.logo .logo-mark { width: 31px; height: 32px; object-fit: contain; flex: none; margin-top: -4px; }
+.logo span { display: inline; }
+.logo b { font-weight: inherit; }
