@@ -257,3 +257,9 @@ a.pcard:hover h3 { color: var(--accent); }
 .bars .bt { height: 10px; border-radius: 5px; background: #2b2f3d; overflow: hidden; }
 .bars .bt i { display: block; height: 100%; border-radius: 5px; background: var(--accent); }
 .bars .bn { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 34px; text-align: right; }
+
+/* social button in the footer */
+.foot-links { align-items: center; }
+.foot-links a.social { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; vertical-align: middle; transition: transform .15s; }
+.foot-links a.social:hover { transform: scale(1.1); }
+.foot-links a.social svg { width: 28px; height: 28px; display: block; }

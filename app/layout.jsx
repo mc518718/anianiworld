@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AuthNav from '@/components/AuthNav';
+import { siFacebook } from 'simple-icons';
 import Tracker from '@/components/Tracker';
 import { CONTACT_EMAIL, FACEBOOK_URL, SITE_URL } from '@/lib/config';
 import './globals.css';
@@ -62,7 +63,12 @@ export default function RootLayout({ children }) {
             <Link href="/terms">Điều khoản dịch vụ</Link>
             <Link href="/privacy">Chính sách quyền riêng tư</Link>
             {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Liên hệ</a>}
-            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a className="social" href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+                <circle cx="12" cy="12" r="11" fill="#fff" />
+                <path d={siFacebook.path} fill={`#${siFacebook.hex}`} />
+              </svg>
+            </a>
           </p>
           <p>
             Anianiworld chỉ lập chỉ mục và nhúng video từ các kênh YouTube chính thức. Video được phát bằng trình
