@@ -197,3 +197,8 @@ button.link:hover { color: var(--accent2); }
 
 /* Anything on the yellow or coral accent always carries dark text, whatever link colour surrounds it. */
 .btn:not(.ghost), .kicker, .tag, .authnav.login, .authnav.avatar, .me-avatar, .tabs button.on, .hc-arrow:hover { color: #14130c !important; }
+
+/* Google sign-in button */
+.gbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 46px; margin-top: 14px; padding: 0 16px; border: 1px solid #dadce0; border-radius: 999px; background: #fff; color: #1f1f1f; font-size: 15px; font-weight: 600; cursor: pointer; }
+.gbtn:hover { background: #f2f4f7; }
+.gbtn img { width: 20px; height: 20px; flex: none; object-fit: contain; }

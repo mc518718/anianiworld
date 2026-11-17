@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { supabase, safeNext } from '@/lib/supabase';
+import GoogleButton from '@/components/GoogleButton';
 
 function RegisterForm() {
   const next = safeNext(useSearchParams().get('next'));
@@ -92,9 +93,7 @@ function RegisterForm() {
         </button>
       </form>
       <div className="or">hoặc</div>
-      <button type="button" className="btn ghost wide" onClick={google}>
-        Đăng ký bằng Google
-      </button>
+      <GoogleButton onClick={google}>Đăng ký bằng Google</GoogleButton>
       <p className="auth-links">
         <span>
           Đã có tài khoản? <Link href="/login">Đăng nhập</Link>

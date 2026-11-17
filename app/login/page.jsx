@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, safeNext } from '@/lib/supabase';
 import { useUser } from '@/components/useUser';
+import GoogleButton from '@/components/GoogleButton';
 
 function LoginForm() {
   const router = useRouter();
@@ -46,9 +47,7 @@ function LoginForm() {
     <div className="auth">
       <h1>Đăng nhập</h1>
       <p className="auth-sub">Đăng ký theo dõi anime và lưu lịch sử xem của bạn.</p>
-      <button type="button" className="btn ghost wide" onClick={google}>
-        Tiếp tục với Google
-      </button>
+      <GoogleButton onClick={google}>Tiếp tục với Google</GoogleButton>
       <div className="or">hoặc</div>
       <form onSubmit={submit}>
         <label>
