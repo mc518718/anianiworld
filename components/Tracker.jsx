@@ -7,6 +7,7 @@ const PAGE = [
   [/^\/$/, 'home'],
   [/^\/browse/, 'browse'],
   [/^\/latest/, 'latest'],
+  [/^\/tap-moi/, 'latest'],
   [/^\/series\//, 'series'],
   [/^\/watch\//, 'watch'],
   [/^\/search/, 'search'],

@@ -58,7 +58,7 @@ export default async function Home() {
       <section className="sec">
         <div className="sec-h">
           <h2>Mới cập nhật</h2>
-          <Link href="/latest">Xem thêm →</Link>
+          <Link href="/tap-moi">Tập mới tuần này →</Link>
         </div>
         <div className="grid">
           {latest.map((s) => (

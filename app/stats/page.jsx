@@ -51,6 +51,12 @@ export default function Stats() {
       <div className="sec-h" style={{ marginTop: 22 }}>
         <h1 className="page-title">Thống kê</h1>
       </div>
+      <p className="meta" style={{ marginTop: -4 }}>
+        Ảnh “tập mới tuần này” để đăng mạng xã hội:{' '}
+        <a href="/weekly-image" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>
+          mở / tải ảnh
+        </a>
+      </p>
       <div className="tabs" style={{ marginTop: 0 }}>
         {[7, 30, 90].map((n) => (
           <button key={n} className={days === n ? 'on' : ''} onClick={() => setDays(n)}>

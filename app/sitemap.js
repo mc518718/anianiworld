@@ -9,6 +9,7 @@ export default async function sitemap() {
   return [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
     { url: `${SITE_URL}/browse`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${SITE_URL}/tap-moi`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
     { url: `${SITE_URL}/latest`, lastModified: now, changeFrequency: 'hourly', priority: 0.7 },
     { url: `${SITE_URL}/terms`, changeFrequency: 'yearly', priority: 0.1 },
     { url: `${SITE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.1 },

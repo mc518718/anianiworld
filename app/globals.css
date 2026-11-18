@@ -269,3 +269,6 @@ a.pcard:hover h3 { color: var(--accent); }
 .logo .logo-mark { width: 31px; height: 32px; object-fit: contain; flex: none; margin-top: -4px; }
 .logo span { display: inline; }
 .logo b { font-weight: inherit; }
+
+/* new-episodes page */
+.badge.new { background: var(--accent); color: #14130c; font-weight: 700; }
